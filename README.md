@@ -5,7 +5,7 @@ State estimation is a fundamental tool to augment the situational awareness of t
 SE_Library - Folder
 	It is the folder that contains the library.
 	Library's interface routine:
-		-Network_parameters_to_SE.m
+		-Network_parameters_to_SE.m 
 		-MeasurementConfiguration_to_SE.m
 		-State_Estimation.m
 	Core - Folder	
@@ -28,7 +28,6 @@ SE_Tests - Folder
 		-plotElapsedTime.m
 		-plotVoltages_3Ph.m
 		-plotCurrents_3Ph.m
-
 
 How to use
 SE_Tests - Folder
