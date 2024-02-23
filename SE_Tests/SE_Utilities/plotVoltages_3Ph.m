@@ -1,4 +1,4 @@
-function plotVoltages_3Ph(V_true, V_est, topology, SE_type_Group, MC, mciter_to_plot)
+function h = plotVoltages_3Ph(V_true, V_est, topology, SE_type_Group, MC, mciter_to_plot)
 
 
 mciter_to_plot = min(mciter_to_plot, MC);
@@ -36,7 +36,7 @@ Vangle_est_method2 =  squeeze(Vangle_est(estimatedNodes, 2, :));
 Vangle_true = Vangle_true(estimatedNodes, :);
 
 %% Plot V module estimation, specific iteration
-figure;
+h(1) = figure;
 subplot(3, 1, 1)
 hold on
 plot(nodesA, Vmodule_est_method1(1 : nA, mciter_to_plot), '*b');
@@ -79,7 +79,7 @@ hold off
 sgtitle(strcat('V module estimation ', ' MC iteration ', num2str(mciter_to_plot)));
 
 %% Plot V angle estimation, specific iteration
-figure;
+h(2) = figure;
 subplot(3, 1, 1)
 hold on
 plot(nodesA, Vangle_est_method1(1 : nA, mciter_to_plot), '*b');
@@ -126,7 +126,7 @@ Vm_rmse_1 = 100 * rmse_rel(Vmodule_true,  Vmodule_est_method1);
 Vm_rmse_2 = 100 * rmse_rel(Vmodule_true,  Vmodule_est_method2);
 
 
-figure;
+h(3) = figure;
 
 subplot(3, 1, 1)
 hold on
@@ -169,7 +169,7 @@ sgtitle('V module error');
 Vangle_rmse_1 = 100 * rmse(Vangle_true,  Vangle_est_method1);
 Vangle_rmse_2 = 100 * rmse(Vangle_true,  Vangle_est_method2);
 
-figure
+h(4) = figure;
 subplot(3, 1, 1)
 hold on
 plot(nodesA, Vangle_rmse_1(1 : nA), '*b');

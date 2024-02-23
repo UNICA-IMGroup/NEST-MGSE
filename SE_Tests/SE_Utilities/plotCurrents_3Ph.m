@@ -1,4 +1,4 @@
-function plotCurrents_3Ph(I_true, I_est, topology, SE_type_Group, MC, mciter_to_plot)
+function h = plotCurrents_3Ph(I_true, I_est, topology, SE_type_Group, MC, mciter_to_plot)
 
 
 mciter_to_plot = min(mciter_to_plot, MC);
@@ -35,7 +35,7 @@ Iangle_est_method2 =  squeeze(Iangle_est(estimatedBranches, 2, :));
 Iangle_true = Iangle_true(estimatedBranches, :);
 
 %% Plot I module estimation, specific iteration
-figure;
+h(1) = figure;
 subplot(3, 1, 1)
 hold on
 plot(branchesA, Imodule_est_method1(1 : nA, mciter_to_plot), '*b');
@@ -78,7 +78,7 @@ hold off
 sgtitle(strcat('I module estimation ', ' MC iteration ', num2str(mciter_to_plot)));
 
 %% Plot I angle estimation, specific iteration
-figure;
+h(2) = figure;
 subplot(3, 1, 1)
 hold on
 plot(branchesA, Iangle_est_method1(1 : nA, mciter_to_plot), '*b');
@@ -125,7 +125,7 @@ Im_rmse_1 = 100 * rmse_rel(Imodule_true,  Imodule_est_method1);
 Im_rmse_2 = 100 * rmse_rel(Imodule_true,  Imodule_est_method2);
 
 
-figure;
+h(3) = figure;
 
 subplot(3, 1, 1)
 hold on
@@ -168,7 +168,7 @@ sgtitle('I module error');
 Iangle_rmse_1 = 100 * rmse(Iangle_true,  Iangle_est_method1);
 Iangle_rmse_2 = 100 * rmse(Iangle_true,  Iangle_est_method2);
 
-figure
+h(4) = figure
 subplot(3, 1, 1)
 hold on
 plot(branchesA, Iangle_rmse_1(1 : nA), '*b');

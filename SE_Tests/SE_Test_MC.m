@@ -3,7 +3,7 @@ function SE_Test_MC(fileTestConfig)
 
 close all;
 clear, clc;
-bSaveData = false;
+bSaveData = true;
 
 rng(0);
 clear Newton_Raphson_Power_Flow_to_SE
@@ -20,6 +20,7 @@ end
 results_folder = './results';
 additional_Paths = Add_Paths;
 eval(fileTestConfig)
+
 
 %% Load network data
 Network = Load_NetworkDataFunction();
@@ -41,7 +42,7 @@ Measurements_param = Load_MeasurementConfiguration(Network_param.topology.num_no
 
 %% Graphic rappresentation of network and measurement system
 if bGraphPlot    
-    h = PlotNetwork_to_SE(Network_param.nominal_linedata, Measurements_param.meas_indices);
+    figures(1) = PlotNetwork_to_SE(Network_param.nominal_linedata, Measurements_param.meas_indices);
 end
 
 %% Montecarlo Simulation
@@ -88,9 +89,9 @@ for mciter = 1:MC_iterations                                                    
     end
 end
 
-plotElapsedTime(estimates_MC.Time, SE_type_Group);
-plotVoltages_3Ph(reference_values_MC.V, estimates_MC.V, Network_param.topology, SE_type_Group, MC_iterations, mciter_to_plot);
-plotCurrents_3Ph(reference_values_MC.I, estimates_MC.I, Network_param.topology, SE_type_Group, MC_iterations, mciter_to_plot);
+figures(2) = plotElapsedTime(estimates_MC.Time, SE_type_Group);
+figures([3 : 6]) = plotVoltages_3Ph(reference_values_MC.V, estimates_MC.V, Network_param.topology, SE_type_Group, MC_iterations, mciter_to_plot);
+figures([7 : 10]) = plotCurrents_3Ph(reference_values_MC.I, estimates_MC.I, Network_param.topology, SE_type_Group, MC_iterations, mciter_to_plot);
 
 Rem_Paths(additional_Paths);
 
@@ -98,6 +99,9 @@ if bSaveData
     final_results_folder = strcat(results_folder, '/', erase(fileTestConfig, '.m'), '_', datestr(now,'mm-dd_HH_MM_SS'));
     mkdir(final_results_folder);
     filename = strcat(erase(fileTestConfig, '.m'), '_results');
+    savefig(figures, strcat(final_results_folder, '/', filename));
+    clear figures;
     save(strcat(final_results_folder, '/', filename, '.mat'));
+    
     copyfile(strcat(mfilename('fullpath'),'.m'), final_results_folder);
 end
