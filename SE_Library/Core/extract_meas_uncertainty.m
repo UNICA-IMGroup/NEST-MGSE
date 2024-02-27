@@ -1,7 +1,7 @@
-
 function [std_rel_Vmag_nod, std_rel_Imag_br, std_rel_Isync_mag, std_rel_Isync_phase, std_rel_Vsync_mag, std_rel_Vsync_phase, ...
     std_rel_PQ_br, std_rel_PQ_inj, std_rel_PQ_pseudo] = extract_meas_uncertainty(meas_unc, bUniform)
-
+% Starting from the uncertainty the method returns the corresponding std
+% values. 
     cov_factor = 3;
     if exist('bUniform', 'var') && bUniform
         cov_factor = sqrt(3);
