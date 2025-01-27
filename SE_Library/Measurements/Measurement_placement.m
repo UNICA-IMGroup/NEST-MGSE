@@ -33,6 +33,17 @@ switch placement_config
         %Synchonized measurements
 %         meas_indices.Isync_magphase_br_idx = []';
 %         meas_indices.Vsync_magphase_nod_idx = []';
+	case '4 nodes placement'    
+			%Pseudo measurements
+			%meas_indices.PQ_pseudo = [2 : num_nodes]';
+			%Standard measurements
+			meas_indices.PQ_br_idx = []';                                                              
+			meas_indices.PQ_inj_idx = [7, 10, 13]';     
+			meas_indices.Vmag_nod_idx = [1]'; 
+			meas_indices.Imag_br_idx = [1]';
+			%Synchonized measurements
+	%         meas_indices.Isync_magphase_br_idx = []';
+	%         meas_indices.Vsync_magphase_nod_idx = []';
     otherwise
         disp([mfilename, ': warning, placement configuration ', placement_config, ' not defined. basic placement configuration is used']);
         %Pseudo measurements
