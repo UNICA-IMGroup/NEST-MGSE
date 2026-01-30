@@ -4,7 +4,7 @@ function h = plotCurrents_3Ph(I_true, I_est, topology, SE_type_Group, MC, mciter
 mciter_to_plot = min(mciter_to_plot, MC);
 nMethods = length(SE_type_Group);
 
-if nMethods ~= 2
+if nMethods >2
     disp([mfilename, ': alert, this plot routing is customized to work with two methods']);
     return;
 end
@@ -27,11 +27,15 @@ nC = length(branchesC);
 estimatedBranches = [branchesA; nBranches + branchesB; nBranches * 2 + branchesC];
 
 Imodule_est_method1 =  squeeze(Imodule_est(estimatedBranches, 1, :));
-Imodule_est_method2 =  squeeze(Imodule_est(estimatedBranches, 2, :));
+
 Imodule_true = Imodule_true(estimatedBranches, :);
 
 Iangle_est_method1 =  squeeze(Iangle_est(estimatedBranches, 1, :));
-Iangle_est_method2 =  squeeze(Iangle_est(estimatedBranches, 2, :));
+if nMethods > 1
+    Imodule_est_method2 =  squeeze(Imodule_est(estimatedBranches, 2, :));
+    Iangle_est_method2 =  squeeze(Iangle_est(estimatedBranches, 2, :));
+end
+
 Iangle_true = Iangle_true(estimatedBranches, :);
 
 %% Plot I module estimation, specific iteration
@@ -39,7 +43,9 @@ h(1) = figure;
 subplot(3, 1, 1)
 hold on
 plot(branchesA, Imodule_est_method1(1 : nA, mciter_to_plot), '*b');
-plot(branchesA, Imodule_est_method2(1 : nA, mciter_to_plot), 'sg');
+if nMethods > 1
+    plot(branchesA, Imodule_est_method2(1 : nA, mciter_to_plot), 'sg');
+end
 plot(branchesA, Imodule_true(1 : nA, mciter_to_plot), 'Or');
 xticks(1 : nBranches);
 xticklabels(1 : nBranches);
@@ -52,7 +58,9 @@ hold off
 subplot(3, 1, 2)
 hold on
 plot(branchesB, Imodule_est_method1(nA + 1 : nA + nB, mciter_to_plot), '*b');
-plot(branchesB, Imodule_est_method2(nA + 1 : nA + nB, mciter_to_plot), 'sg');
+if nMethods > 1
+    plot(branchesB, Imodule_est_method2(nA + 1 : nA + nB, mciter_to_plot), 'sg');
+end
 plot(branchesB, Imodule_true(nA + 1 : nA + nB, mciter_to_plot), 'Or');
 xticks(1 : nBranches);
 xticklabels(1 : nBranches);
@@ -65,7 +73,9 @@ hold off
 subplot(3, 1, 3)
 hold on
 plot(branchesC, Imodule_est_method1(nA + nB + 1 : end, mciter_to_plot), '*b');
-plot(branchesC, Imodule_est_method2(nA + nB + 1 : end, mciter_to_plot), 'sg');
+if nMethods > 1
+    plot(branchesC, Imodule_est_method2(nA + nB + 1 : end, mciter_to_plot), 'sg');
+end
 plot(branchesC, Imodule_true(nA + nB + 1 : end, mciter_to_plot), 'Or');
 
 xticks(1 : nBranches);
@@ -82,7 +92,9 @@ h(2) = figure;
 subplot(3, 1, 1)
 hold on
 plot(branchesA, Iangle_est_method1(1 : nA, mciter_to_plot), '*b');
-plot(branchesA, Iangle_est_method2(1 : nA, mciter_to_plot), 'sg');
+if nMethods > 1
+    plot(branchesA, Iangle_est_method2(1 : nA, mciter_to_plot), 'sg');
+end
 plot(branchesA, Iangle_true(1 : nA, mciter_to_plot), 'Or');
 xticks(1 : nBranches);
 xticklabels(1 : nBranches);
@@ -95,7 +107,9 @@ hold off
 subplot(3, 1, 2)
 hold on
 plot(branchesB, Iangle_est_method1(nA + 1 : nA + nB, mciter_to_plot), '*b');
-plot(branchesB, Iangle_est_method2(nA + 1 : nA + nB, mciter_to_plot), 'sg');
+if nMethods > 1
+    plot(branchesB, Iangle_est_method2(nA + 1 : nA + nB, mciter_to_plot), 'sg');
+end
 plot(branchesB, Iangle_true(nA + 1 : nA + nB, mciter_to_plot), 'Or');
 xticks(1 : nBranches);
 xticklabels(1 : nBranches);
@@ -108,7 +122,9 @@ hold off
 subplot(3, 1, 3)
 hold on
 plot(branchesC, Iangle_est_method1(nA + nB + 1 : end, mciter_to_plot), '*b');
-plot(branchesC, Iangle_est_method2(nA + nB + 1 : end, mciter_to_plot), 'sg');
+if nMethods > 1
+    plot(branchesC, Iangle_est_method2(nA + nB + 1 : end, mciter_to_plot), 'sg');
+end
 plot(branchesC, Iangle_true(nA + nB + 1 : end, mciter_to_plot), 'Or');
 
 xticks(1 : nBranches);
@@ -122,7 +138,9 @@ sgtitle(strcat('I angle estimation ', ' MC iteration ', num2str(mciter_to_plot))
 %% plot I module estimation results
 
 Im_rmse_1 = 100 * rmse_rel(Imodule_true,  Imodule_est_method1);
-Im_rmse_2 = 100 * rmse_rel(Imodule_true,  Imodule_est_method2);
+if nMethods > 1
+    Im_rmse_2 = 100 * rmse_rel(Imodule_true,  Imodule_est_method2);
+end
 
 
 h(3) = figure;
@@ -130,7 +148,9 @@ h(3) = figure;
 subplot(3, 1, 1)
 hold on
 plot(branchesA, Im_rmse_1(1 : nA), '*b');
-plot(branchesA, Im_rmse_2(1 : nA), 'sg');
+if nMethods > 1
+    plot(branchesA, Im_rmse_2(1 : nA), 'sg');
+end
 xticks(1 : nBranches);
 xticklabels(1 : nBranches);
 title(strcat('Phase A'));
@@ -142,7 +162,9 @@ hold off
 subplot(3, 1, 2)
 hold on
 plot(branchesB, Im_rmse_1(nA + 1 : nA + nB), '*b');
-plot(branchesB, Im_rmse_2(nA + 1 : nA + nB), 'sg');
+if nMethods > 1
+    plot(branchesB, Im_rmse_2(nA + 1 : nA + nB), 'sg');
+end
 xticks(1 : nBranches);
 xticklabels(1 : nBranches);
 title(strcat('Phase B'));
@@ -154,7 +176,9 @@ hold off
 subplot(3, 1, 3)
 hold on
 plot(branchesC, Im_rmse_1(nA + nB + 1 : end), '*b');
-plot(branchesC, Im_rmse_2(nA + nB + 1 : end), 'sg');
+if nMethods > 1
+    plot(branchesC, Im_rmse_2(nA + nB + 1 : end), 'sg');
+end
 xticks(1 : nBranches);
 xticklabels(1 : nBranches);
 title(strcat('Phase C'));
@@ -166,13 +190,17 @@ sgtitle('I module error');
 
 %% plot I angle estimation results
 Iangle_rmse_1 = 100 * rmse(Iangle_true,  Iangle_est_method1);
-Iangle_rmse_2 = 100 * rmse(Iangle_true,  Iangle_est_method2);
+if nMethods > 1
+    Iangle_rmse_2 = 100 * rmse(Iangle_true,  Iangle_est_method2);
+end
 
 h(4) = figure
 subplot(3, 1, 1)
 hold on
 plot(branchesA, Iangle_rmse_1(1 : nA), '*b');
-plot(branchesA, Iangle_rmse_2(1 : nA), 'sg');
+if nMethods > 1
+    plot(branchesA, Iangle_rmse_2(1 : nA), 'sg');
+end
 xticks(1 : nBranches);
 xticklabels(1 : nBranches);
 % xticks(1:length(estimatedBranches));
@@ -186,7 +214,9 @@ hold off
 subplot(3, 1, 2)
 hold on
 plot(branchesB, Iangle_rmse_1(nA + 1 : nA + nB), '*b');
-plot(branchesB, Iangle_rmse_1(nA + 1 : nA + nB), 'sg');
+if nMethods > 1
+    plot(branchesB, Iangle_rmse_2(nA + 1 : nA + nB), 'sg');
+end
 xticks(1 : nBranches);
 xticklabels(1 : nBranches);
 % xticks(1:length(estimatedBranches));
@@ -200,7 +230,9 @@ hold off
 subplot(3, 1, 3)
 hold on
 plot(branchesC, Iangle_rmse_1(nA + nB + 1 : end), '*b');
-plot(branchesC, Iangle_rmse_1(nA + nB + 1 : end), 'sg');
+if nMethods > 1
+    plot(branchesC, Iangle_rmse_2(nA + nB + 1 : end), 'sg');
+end
 xticks(1 : nBranches);
 xticklabels(1 : nBranches);
 % xticks(1:length(estimatedBranches));

@@ -1,4 +1,4 @@
-function [h, p] = plotNetwork(branch_from, branch_to, branch_num, monitoredNodes, monitoredBranches)
+function [h, p, nMis] = plotNetwork(branch_from, branch_to, branch_num, monitoredNodes, monitoredBranches)
 
 h = figure; 
 

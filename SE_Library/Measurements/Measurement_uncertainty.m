@@ -16,12 +16,7 @@ switch unc_config
         meas_unc.unc_percent_PQ_br = 3;
         meas_unc.unc_percent_Vmag_nod = 1;
         meas_unc.unc_percent_Imag_br = 3;
-        
-        %Synchronized measurement
-%         meas_unc.unc_percent_Vsync_mag = 1;
-%         meas_unc.unc_crad_Vsync_phase = 1;
-%         meas_unc.unc_percent_Isync_mag = 1;
-%         meas_unc.unc_crad_Isync_phase = 1;
+  
     case 'nominal'
         %Pseudo measurements
         meas_unc.unc_percent_PQ_pseudo = 50;
@@ -31,12 +26,26 @@ switch unc_config
         meas_unc.unc_percent_PQ_br = 1;
         meas_unc.unc_percent_Vmag_nod = 1;
         meas_unc.unc_percent_Imag_br = 1;
+
+    case 'default + forecasting 10'
+        %Pseudo measurements
+        meas_unc.unc_percent_PQ_pseudo = 10;
         
-        %Synchronized measurement
-%         meas_unc.unc_percent_Vsync_mag = 1;
-%         meas_unc.unc_crad_Vsync_phase = 1;
-%         meas_unc.unc_percent_Isync_mag = 1;
-%         meas_unc.unc_crad_Isync_phase = 1;
+        % Standard measurement
+        meas_unc.unc_percent_PQ_inj = 3;   
+        meas_unc.unc_percent_PQ_br = 3;
+        meas_unc.unc_percent_Vmag_nod = 1;
+        meas_unc.unc_percent_Imag_br = 3;
+    
+	case 'forecasting + 25'
+        %Pseudo measurements
+        meas_unc.unc_percent_PQ_pseudo = 25;
+        
+        % Standard measurement
+        meas_unc.unc_percent_PQ_inj = 3;   
+        meas_unc.unc_percent_PQ_br = 3;
+        meas_unc.unc_percent_Vmag_nod = 1;
+        meas_unc.unc_percent_Imag_br = 3;
         
     otherwise
         disp([mfilename, ': warning, unc_code not defined. default unc_code configuration is used']); 
@@ -49,10 +58,5 @@ switch unc_config
         meas_unc.unc_percent_PQ_br = 3;
         meas_unc.unc_percent_Vmag_nod = 1;
         meas_unc.unc_percent_Imag_br = 3;
-        
-        %Synchronized measurement
-%         meas_unc.unc_percent_Vsync_mag = 1;
-%         meas_unc.unc_crad_Vsync_phase = 1;
-%         meas_unc.unc_percent_Isync_mag = 1;
-%         meas_unc.unc_crad_Isync_phase = 1;
+
 end

@@ -11,11 +11,11 @@ function measured_values = AddMeasurementErrors_SE(reference_values, Measurement
 
     if ~isempty(Measurements_param.meas_indices.Vmag_nod_idx)
         measured_values.V(Measurements_param.meas_indices.Vmag_nod_idx, :) ...
-            = reference_values.V(Measurements_param.meas_indices.Vmag_nod_idx, :) .* (1 + std_rel_Vmag_nod .* randn(size(Measurements_param.meas_indices.Vmag_nod_idx)));
+            = abs(reference_values.V(Measurements_param.meas_indices.Vmag_nod_idx, :)) .* (1 + std_rel_Vmag_nod .* randn(size(Measurements_param.meas_indices.Vmag_nod_idx)));
     end
     if ~isempty(Measurements_param.meas_indices.Imag_br_idx)
         measured_values.I(Measurements_param.meas_indices.Imag_br_idx, :) ...
-            = reference_values.I(Measurements_param.meas_indices.Imag_br_idx, :) .* (1 + std_rel_Imag_br .* randn(size(Measurements_param.meas_indices.Imag_br_idx)));
+            = abs(reference_values.I(Measurements_param.meas_indices.Imag_br_idx, :)) .* (1 + std_rel_Imag_br .* randn(size(Measurements_param.meas_indices.Imag_br_idx)));
     end
     if ~isempty(Measurements_param.meas_indices.PQ_br_idx)
         measured_values.S_br(Measurements_param.meas_indices.PQ_br_idx, :) ...

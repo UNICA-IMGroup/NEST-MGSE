@@ -8,7 +8,14 @@ end
 %The time of the first iteration is not considered because the impedence
 %and admitance matrices are built in the first iteration only.
 h = figure;
-plot(2 : MC, elapsed_time(1, 2 : end),  2 : MC, elapsed_time(2, 2 : end));
+
+plot(2 : MC, elapsed_time(1, 2 : end));
+hold on
+for ii = 2 : length(SE_type_Group)
+
+    plot(2 : MC, elapsed_time(2, 2 : end));
+end
+
 title('elapsed time');
 legend (SE_type_Group);
 ylabel('s');
