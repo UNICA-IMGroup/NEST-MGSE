@@ -17,8 +17,8 @@ SE_Library - Folder
 SE_Tests - Folder
 	It is the folder that performs the tests.
 		-MGSE_Test.m is the main of the test, use:
-			MGSE_Test_MC
-			MGSE_Test_MC Test_MC_config_3
+			MGSE_Test
+			MGSE_Test Test_MC_config_3
 	
 	SE_Utilities
 		It contains utility files used in the tests, examples:
@@ -31,8 +31,8 @@ How to use
 SE_Tests - Folder
 	It is the folder that performs the tests.
 		-MGSE_Test.m is the main of the test, use:
-			MGSE_Test_MC
-			MGSE_Test_MC Test_MC_config_3
+			MGSE_Test
+			MGSE_Test Test_MC_config_3
 			
 
 	
