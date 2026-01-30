@@ -1,5 +1,5 @@
 # NEST-MGSE
-The software realizes a framework for the state estimation in a generic distribution network as the first step to develop a state estimation for microgrids (MGSE). 
+The software realizes a framework for A framework for microgid state estimation (MGSE). 
 State estimation is a fundamental tool to augment the situational awareness of the system enabling the development of strategic applications.
 
 SE_Library - Folder
@@ -16,25 +16,23 @@ SE_Library - Folder
 		-Measurement_uncertainty.m it defines the measurement uncertainty configurations
 SE_Tests - Folder
 	It is the folder that performs the tests.
-		-SE_Test_MC.m is the main of the test, use:
-			SE_Test_MC
-			SE_TEst_MC Test_MC_config_3
+		-MGSE_Test.m is the main of the test, use:
+			MGSE_Test_MC
+			MGSE_Test_MC Test_MC_config_3
 	
 	SE_Utilities
 		It contains utility files used in the tests, examples:
 		-Newton_Raphson_Power_Flow_to_SE.m implements the power flow Newton-Raphson method to obtain reference values
 		-AddMeasurementErrors_SE.m simulate measurements
 		-PlotNetwork_to_SE.m plot the graph of the network
-		-plotElapsedTime.m
-		-plotVoltages_3Ph.m
-		-plotCurrents_3Ph.m
+		-plot_MGSE(V, I, Network_param.topology, general_title); plot the estimate values with their confidence interval
 
 How to use
 SE_Tests - Folder
 	It is the folder that performs the tests.
-		-SE_Test_MC.m is the main of the test, use:
-			SE_Test_MC
-			SE_TEst_MC Test_MC_config_3
+		-MGSE_Test.m is the main of the test, use:
+			MGSE_Test_MC
+			MGSE_Test_MC Test_MC_config_3
 			
 
 	
