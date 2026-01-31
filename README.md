@@ -9,33 +9,37 @@ In the case of poorly monitored networks, as in the cases addressed in this stud
 Stranting from the Network under monitoring description, the measurement system description, and the measurements (psedudo-measurements and real time measurements), the software provide the estimates of all the node Voltages and of all the branch currents, in module and phase angle, along with their extended uncertanty.  
 
 Software Organization
+
 	SE_Library - Folder
 		It is the folder that contains the library.
 		Library's interface routine:
 			-Network_parameters_to_SE.m 
 			-MeasurementConfiguration_to_SE.m
 			-State_Estimation.m
-		Core - Folder	
+		Core - Folder
+			Implements the state estimation library core, that is the routines used by state library interface functions.
 		Networks - Folder
 			It contains Networks definition files
 		Measurements - Folder
 			-Measurement_placement.m it defines the measurement placement configurations
 			-Measurement_uncertainty.m it defines the measurement uncertainty configurations
+
+	SE_Utilities
+		It contains utility files used in the tests, examples:
+		-Newton_Raphson_Power_Flow_to_SE.m implements the power flow Newton-Raphson method to obtain reference values
+		-AddMeasurementErrors_SE.m simulate measurements
+		-PlotNetwork_to_SE.m plot the graph of the network
+		-plot_MGSE plot the estimate values with their confidence interval
+
 	SE_Tests - Folder
 		It is the folder that performs the tests.
 			-MGSE_Test.m is the main of the test, use:
 				MGSE_Test
 				MGSE_Test Test_MC_config_3
-		
-		SE_Utilities
-			It contains utility files used in the tests, examples:
-			-Newton_Raphson_Power_Flow_to_SE.m implements the power flow Newton-Raphson method to obtain reference values
-			-AddMeasurementErrors_SE.m simulate measurements
-			-PlotNetwork_to_SE.m plot the graph of the network
-			-plot_MGSE(V, I, Network_param.topology, general_title); plot the estimate values with their confidence interval
 
 How to use
-SE_Tests - Folder
+
+SE_Tests - Folder containg examples
 	It is the folder that performs the tests.
 		-MGSE_Test.m is the main of the test, use:
 			MGSE_Test
