@@ -6,7 +6,7 @@ State Estimation is based on mathematical relations between system state variabl
 where z=[z_1,z_2,…,z_M ]^T is the vector of the M available measurements, h is the mathematical relation representing the measurement functions (depending on the specific measurement type, 
 for example, power flow or injection, voltage or current measurements, etc.) that involve network topology and parameters, x=[x_1,x_2,…,x_N ]^T is the vector of the N state variables and e is the measurement error vector. 
 In the case of poorly monitored networks, as in the cases addressed in this study, it is possible to exploit to so-called pseudo-measurements, i.e. a priori knowledge of the powers absorbed or injected into the various nodes of the network.
-Stranting from the Network under monitoring description, the measurement system description, and the measurements (psedudo-measurements and real time measurements), the software provide the estimates of all the node Voltages and of all the branch currents, in module and phase angle, along with their extended uncertanty.  
+Stranting from the Network under monitoring description, the measurement system description, and the measurements (psedudo-measurements and real time measurements), the software provides the estimates of all the node Voltages and of all the branch currents, in module and phase angle, along with their extended uncertanty.  
 
 Software Organization
 
